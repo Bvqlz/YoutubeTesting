@@ -1,8 +1,9 @@
 import java.io.InputStream;
 import java.util.List;
 import java.util.Properties;
-
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotInteractableException;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -65,6 +66,7 @@ public class ProfileSession {
     private void login() {
         driver.get("https://www.youtube.com");
 
+
         // This is a simple check to see if a session is already created
         boolean isLoggedIn = !driver.findElements(By.cssSelector("button#avatar-btn")).isEmpty();
         
@@ -106,7 +108,7 @@ public class ProfileSession {
         System.out.println("Waiting for login");
 
         try { 
-            Thread.sleep(60000); 
+            Thread.sleep(30000); 
         } catch (InterruptedException e) { 
             Thread.currentThread().interrupt();
         }
@@ -115,7 +117,7 @@ public class ProfileSession {
         driver.get("https://www.youtube.com");
 
         try { 
-            Thread.sleep(60000); 
+            Thread.sleep(25000); 
         } catch (InterruptedException e) { 
             Thread.currentThread().interrupt();
         }
@@ -127,6 +129,76 @@ public class ProfileSession {
         } else {
             System.out.println("Could not log in.");
         }
+    }
+
+    // Checks if a YouTube Premium popup or ad is present and handles both.
+    // Call this after navigating to any video or livestream.
+    protected void handleAd(int maxWaitSeconds) {
+
+        // Dismiss the popup if it appears
+        List<WebElement> popup = driver.findElements(By.cssSelector("button[aria-label='No thanks']"));
+        if (!popup.isEmpty()) {
+            try {
+                popup.get(0).click();
+            } catch (ElementNotInteractableException e) {
+                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", popup.get(0));
+            }
+            System.out.println("Dismissed popup.");
+        }
+
+        boolean adPlaying = !driver.findElements(By.cssSelector("div.ad-showing")).isEmpty();
+
+        if (!adPlaying) {
+            System.out.println("No ad detected.");
+            return;
+        }
+
+        System.out.println("Ad detected. Waiting for skip");
+
+        // Need to check every 5 seconds if the skip buttom appears
+        int intervals = maxWaitSeconds / 5;
+
+        for (int i = 0; i < intervals; i++) {
+
+            try { 
+                Thread.sleep(5000); 
+            } catch (InterruptedException e) { 
+                Thread.currentThread().interrupt();
+            }
+
+            // Check if skip button is available and click it
+            List<WebElement> skipButton = driver.findElements(By.cssSelector("button.ytp-skip-ad-button"));
+            if (!skipButton.isEmpty()) {
+                try {
+                    skipButton.get(0).click();
+                } catch (ElementNotInteractableException e) {
+                    ((JavascriptExecutor) driver).executeScript("arguments[0].click();", skipButton.get(0));
+                }
+                System.out.println("Ad skipped.");
+                return;
+            }
+
+            // Check if ad finished on its own without needing to skip
+            boolean stillPlaying = !driver.findElements(By.cssSelector("div.ad-showing")).isEmpty();
+            if (!stillPlaying) {
+                System.out.println("Ad finished. Checking for another ad");
+
+                // Pauses to check if there is another ad 
+                try { 
+                    Thread.sleep(3000); 
+                } catch (InterruptedException e) { 
+                    Thread.currentThread().interrupt(); 
+                }
+
+                // If another ad started, calls itself again to handle it the same way
+                if (!driver.findElements(By.cssSelector("div.ad-showing")).isEmpty()) {
+                    System.out.println("Another ad detected.");
+                    handleAd(maxWaitSeconds);
+                }
+                return;
+            }
+        }
+        System.out.println("Ad wait time exceeded.");
     }
 
     private Properties loadCredentials() {
