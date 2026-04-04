@@ -1,0 +1,10 @@
+# Credentials — never commit the real file, only the .example template
+credentials.properties
+
+# Maven build output
+target/
+
+# IDE files
+.idea/
+*.iml
+.vscode/
