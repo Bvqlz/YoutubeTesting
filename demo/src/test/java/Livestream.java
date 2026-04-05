@@ -64,7 +64,7 @@ public class Livestream extends ProfileSession {
 
         // Need to get messages from this user
         String username = "@ZontaTest";
-        String message = "this might be my new favorite";
+        String message = "love this song";
 
         // Chat runs inside in an iframe need to switch to intreact with its elements
         WebElement chatFrame = driver.findElement(By.cssSelector("iframe[id='chatframe']"));
@@ -108,7 +108,7 @@ public class Livestream extends ProfileSession {
 
         // Switch back to the main page once done
         driver.switchTo().defaultContent();
-        Assert.assertEquals(message, actualMessage);
+        Assert.assertEquals(actualMessage, message);
     }
 
     @Test (priority = 2)
@@ -163,8 +163,8 @@ public class Livestream extends ProfileSession {
         driver.switchTo().defaultContent();
 
         // Verify the toggles are in the expected state
-        Assert.assertEquals("true", timeState);
-        Assert.assertEquals("false", reactionState);
+        Assert.assertEquals(timeState, "true");
+        Assert.assertEquals(reactionState, "false");
     }
 
     @Test (priority = 3)
@@ -213,7 +213,7 @@ public class Livestream extends ProfileSession {
         driver.close();
         driver.switchTo().window(windowHandles.get(0));
 
-        Assert.assertEquals(true, urlTitle.contains("is_popout"));
+        Assert.assertEquals(urlTitle.contains("is_popout"), true);
     }
 
     @Test (priority = 4)
@@ -267,7 +267,7 @@ public class Livestream extends ProfileSession {
         }
 
         String clipTitle = driver.findElement(By.cssSelector("span[id='title']")).getText();
-        Assert.assertEquals(title, clipTitle);
+        Assert.assertEquals(clipTitle, title);
 
     }
 
@@ -298,6 +298,6 @@ public class Livestream extends ProfileSession {
 
         // Verify the "Open Panel" button state becomes enabled after closing the chat
         String panelState = driver.findElement(By.xpath("/html/body/ytd-app/div[1]/ytd-page-manager/ytd-watch-flexy/div[4]/div[1]/div/div[2]/ytd-watch-metadata/div/div[4]/div[4]/yt-video-metadata-carousel-view-model/div[2]/div/yt-carousel-item-view-model/yt-text-carousel-item-view-model/button-view-model/button")).getAttribute("aria-disabled");
-        Assert.assertEquals("false", panelState);
+        Assert.assertEquals(panelState, "false");
     }
 }
