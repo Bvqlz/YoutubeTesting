@@ -1,8 +1,6 @@
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import org.testng.Assert;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeClass;
@@ -110,7 +108,7 @@ public class Livestream extends ProfileSession {
 
         // Switch back to the main page once done
         driver.switchTo().defaultContent();
-        assertEquals(message, actualMessage);
+        Assert.assertEquals(message, actualMessage);
     }
 
     @Test (priority = 2)
@@ -165,8 +163,8 @@ public class Livestream extends ProfileSession {
         driver.switchTo().defaultContent();
 
         // Verify the toggles are in the expected state
-        assertEquals("true", timeState);
-        assertEquals("false", reactionState);
+        Assert.assertEquals("true", timeState);
+        Assert.assertEquals("false", reactionState);
     }
 
     @Test (priority = 3)
@@ -215,7 +213,7 @@ public class Livestream extends ProfileSession {
         driver.close();
         driver.switchTo().window(windowHandles.get(0));
 
-        assertEquals(true, urlTitle.contains("is_popout"));
+        Assert.assertEquals(true, urlTitle.contains("is_popout"));
     }
 
     @Test (priority = 4)
@@ -269,7 +267,7 @@ public class Livestream extends ProfileSession {
         }
 
         String clipTitle = driver.findElement(By.cssSelector("span[id='title']")).getText();
-        assertEquals(title, clipTitle);
+        Assert.assertEquals(title, clipTitle);
 
     }
 
@@ -300,6 +298,6 @@ public class Livestream extends ProfileSession {
 
         // Verify the "Open Panel" button state becomes enabled after closing the chat
         String panelState = driver.findElement(By.xpath("/html/body/ytd-app/div[1]/ytd-page-manager/ytd-watch-flexy/div[4]/div[1]/div/div[2]/ytd-watch-metadata/div/div[4]/div[4]/yt-video-metadata-carousel-view-model/div[2]/div/yt-carousel-item-view-model/yt-text-carousel-item-view-model/button-view-model/button")).getAttribute("aria-disabled");
-        assertEquals("false", panelState);
+        Assert.assertEquals("false", panelState);
     }
 }
