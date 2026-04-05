@@ -107,7 +107,7 @@ public class Playlists extends ProfileSession {
         WebElement playlist = driver.findElement(By.cssSelector("h3[title='Selenium Tutorials']"));
         String title = playlist.getAttribute("title");
 
-        Assert.assertEquals("Selenium Tutorials", title);
+        Assert.assertEquals(title, "Selenium Tutorials");
     }
     
     @Test (priority = 2)
@@ -181,7 +181,7 @@ public class Playlists extends ProfileSession {
         // because yt-badge-shape__text is too generic and caused errors
         WebElement playlistCard = driver.findElement(By.xpath("//ytd-rich-item-renderer[.//h3[@title='Selenium Tutorials']]"));
         String videoCount = playlistCard.findElement(By.cssSelector("div[class='yt-badge-shape__text']")).getText();
-        Assert.assertEquals("2 videos", videoCount);
+        Assert.assertEquals(videoCount, "2 videos");
     }
 
     @Test (priority = 3)
@@ -235,7 +235,7 @@ public class Playlists extends ProfileSession {
         String videoTitle = videos.get(0).getAttribute("title"); 
 
 
-        Assert.assertEquals("Java Testing with Selenium Course", videoTitle);
+        Assert.assertEquals(videoTitle, "Java Testing with Selenium Course");
     }
 
     @Test (priority = 4) 
@@ -307,7 +307,7 @@ public class Playlists extends ProfileSession {
 
         // Check that only 1 video is left in the playlist
         List<WebElement> videos = driver.findElements(By.cssSelector("span[id='video-title']"));
-        Assert.assertEquals(1, videos.size());
+        Assert.assertEquals(videos.size(), 1);
     }
 
     @Test (priority = 5)
