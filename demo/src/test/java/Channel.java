@@ -252,4 +252,3 @@ public class Channel  extends ProfileSession {
         Assert.assertEquals(btnText, "Subscribe");
     }
 }
-
