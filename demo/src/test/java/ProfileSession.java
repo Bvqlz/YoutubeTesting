@@ -1,6 +1,7 @@
 import java.io.InputStream;
 import java.util.List;
 import java.util.Properties;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.JavascriptExecutor;
@@ -19,7 +20,7 @@ public class ProfileSession {
     protected static WebDriver driver;
 
     // This is the path that stores the session data for the Chrome profile
-    protected static final String session_path = "D:/selenium-youtube-profile";
+    protected static final String session_path = "C:/selenium-youtube-profile";
 
     // This method runs once before any tests in the suite
     // Done this way to ensure the session is established before any test

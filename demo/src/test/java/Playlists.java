@@ -1,4 +1,5 @@
 import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -97,10 +98,10 @@ public class Playlists extends ProfileSession {
         WebElement playlistBtn = driver.findElement(By.cssSelector("a[title='Playlists']"));
         playlistBtn.click();
 
-        try { 
-            Thread.sleep(2500); 
-        } catch (InterruptedException e) { 
-            Thread.currentThread().interrupt(); 
+        try {
+            Thread.sleep(2500);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
         }
 
         // Check if the playlist exists by matching the h3 title attribute

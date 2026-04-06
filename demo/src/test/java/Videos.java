@@ -1,8 +1,8 @@
 import java.time.Duration;
 import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -26,6 +26,7 @@ public class Videos extends ProfileSession {
         wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("video")));
         try { Thread.sleep(3000); } catch (InterruptedException e) { Thread.currentThread().interrupt(); }
+        handleAd(45);
     }
 
     @Test(priority = 1)
@@ -129,7 +130,7 @@ public class Videos extends ProfileSession {
         ((JavascriptExecutor) driver).executeScript("window.scrollBy(0, 600);");
         try { Thread.sleep(2000); } catch (InterruptedException e) { Thread.currentThread().interrupt(); }
 
-        String comment = "Test comment " + System.currentTimeMillis();
+        String comment = "Love this mix" + System.currentTimeMillis();
 
         WebElement commentBox = wait.until(ExpectedConditions.elementToBeClickable(
             By.cssSelector("#simplebox-placeholder")));

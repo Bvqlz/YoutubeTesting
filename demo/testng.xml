@@ -2,4 +2,94 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="YouTube Test Suite" verbose="1">
 
+    <listeners>
+        <listener class-name="org.testng.reporters.EmailableReporter2"/>
+    </listeners>
+
+    <test name="YouTube Tests" preserve-order="true">
+        <classes>
+
+            <class name="Home">
+                <methods>
+                    <include name="quickPreview"/>
+                    <include name="logoNavigation"/>
+                    <include name="sidebarToggle"/>
+                    <include name="categoryChips"/>
+                    <include name="infiniteScroll"/>
+                </methods>
+            </class>
+
+            <class name="FilterTests">
+                <methods>
+                    <include name="selectTypeShorts"/>
+                    <include name="selectDurationOver20Minutes"/>
+                    <include name="selectUploadDateThisMonth"/>
+                    <include name="selectFeatures4K"/>
+                    <include name="selectPrioritizePopularity"/>
+                </methods>
+            </class>
+
+            <class name="ShortsTests">
+                <methods>
+                    <include name="pauseAndResume"/>
+                    <include name="likeShort"/>
+                    <include name="muteAndUnmute"/>
+                    <include name="openCommentSection"/>
+                    <include name="clickShareButton"/>
+                </methods>
+            </class>
+
+            <class name="Videos">
+                <methods>
+                    <include name="likeVideo"/>
+                    <include name="changeResolution"/>
+                    <include name="miniPlayer"/>
+                    <include name="transcriptAccess"/>
+                    <include name="addComment"/>
+                </methods>
+            </class>
+
+            <class name="Channel">
+                <methods>
+                    <include name="subscribe"/>
+                    <include name="subscriptionFeed"/>
+                    <include name="toggleNotifications"/>
+                    <include name="communityPosts"/>
+                    <include name="unsubscribe"/>
+                </methods>
+            </class>
+
+            <class name="Playlists">
+                <methods>
+                    <include name="createPlaylist"/>
+                    <include name="addToPlaylist"/>
+                    <include name="reorderPlaylist"/>
+                    <include name="removeVideo"/>
+                    <include name="deletePlaylist"/>
+                </methods>
+            </class>
+
+            <class name="Livestream">
+                <methods>
+                    <include name="liveChat"/>
+                    <include name="toggleFeatures"/>
+                    <include name="popChat"/>
+                    <include name="createClip"/>
+                    <include name="toggleChat"/>
+                </methods>
+            </class>
+
+            <class name="Account">
+                <methods>
+                    <include name="changeTheme"/>
+                    <include name="changeLanguage"/>
+                    <include name="toggleCaptions"/>
+                    <include name="toggleSettings"/>
+                    <include name="pauseHistory"/>
+                </methods>
+            </class>
+
+        </classes>
+    </test>
+
 </suite>
