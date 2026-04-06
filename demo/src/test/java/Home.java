@@ -1,5 +1,6 @@
 import java.time.Duration;
 import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -61,22 +62,25 @@ public class Home extends ProfileSession {
     public void sidebarToggle() {
         WebElement menuBtn = driver.findElement(By.cssSelector("button[aria-label='Guide']"));
 
-        // Click to open the guide first, then check it rendered
+        // Store the initial sidebar state before toggling
+        List<WebElement> before = driver.findElements(By.cssSelector("ytd-guide-renderer"));
+        boolean sidebarWasOpen = !before.isEmpty() && before.get(0).isDisplayed();
+
+        // First toggle — state should flip
         menuBtn.click();
-
-        WebElement sidebar = wait.until(ExpectedConditions.presenceOfElementLocated(
-            By.cssSelector("ytd-guide-renderer")));
-        Assert.assertTrue(sidebar.isDisplayed(), "Sidebar did not become visible after toggle");
-
-        // Click again to close
-        menuBtn.click();
-
         try { Thread.sleep(1500); } catch (InterruptedException e) { Thread.currentThread().interrupt(); }
 
-        // After closing, it should either be hidden or removed
-        List<WebElement> sidebars = driver.findElements(By.cssSelector("ytd-guide-renderer"));
-        boolean hiddenOrGone = sidebars.isEmpty() || !sidebars.get(0).isDisplayed();
-        Assert.assertTrue(hiddenOrGone, "Sidebar did not hide after second toggle");
+        List<WebElement> afterFirst = driver.findElements(By.cssSelector("ytd-guide-renderer"));
+        boolean afterFirstOpen = !afterFirst.isEmpty() && afterFirst.get(0).isDisplayed();
+        Assert.assertNotEquals(sidebarWasOpen, afterFirstOpen, "Sidebar state did not change after first toggle");
+
+        // Second toggle — state should return to original
+        menuBtn.click();
+        try { Thread.sleep(1500); } catch (InterruptedException e) { Thread.currentThread().interrupt(); }
+
+        List<WebElement> afterSecond = driver.findElements(By.cssSelector("ytd-guide-renderer"));
+        boolean afterSecondOpen = !afterSecond.isEmpty() && afterSecond.get(0).isDisplayed();
+        Assert.assertEquals(sidebarWasOpen, afterSecondOpen, "Sidebar did not restore to original state");
     }
 
     @Test(priority = 4)
