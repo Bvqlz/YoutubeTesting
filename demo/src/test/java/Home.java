@@ -11,13 +11,13 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class Home extends ProfileSession {
+public class Home extends ProfileSession { // parallel: extends ProfileSessionParallel
 
     private WebDriverWait wait;
 
     @BeforeMethod
     public void resetHome() throws InterruptedException {
-        driver.get("https://www.youtube.com/");
+        driver.get("https://www.youtube.com/"); // parallel: getDriver().get(...)
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         // Wait until videos are actually loaded before each test
         wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(

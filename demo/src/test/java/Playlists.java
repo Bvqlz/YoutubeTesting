@@ -8,11 +8,11 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class Playlists extends ProfileSession {
+public class Playlists extends ProfileSession { // parallel: extends ProfileSessionParallel
 
     @BeforeClass
     public void openYoutube() {
-        driver.get("https://www.youtube.com/");
+        driver.get("https://www.youtube.com/"); // parallel: getDriver().get(...)
     }
 
     @Test (priority = 1)
@@ -63,7 +63,7 @@ public class Playlists extends ProfileSession {
         }
 
         // Click new playlist
-        WebElement newBtn = driver.findElement(By.cssSelector("button[aria-label='Create new playlist']"));
+        WebElement newBtn = driver.findElement(By.cssSelector("button[aria-label='Create a new playlist']"));
         newBtn.click();
 
         try { 

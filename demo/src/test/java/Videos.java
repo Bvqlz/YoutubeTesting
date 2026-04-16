@@ -11,7 +11,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class Videos extends ProfileSession {
+public class Videos extends ProfileSession { // parallel: extends ProfileSessionParallel
 
     private WebDriverWait wait;
     private JavascriptExecutor js;
@@ -21,7 +21,7 @@ public class Videos extends ProfileSession {
 
     @BeforeMethod
     public void resetVideo() {
-        driver.get(VIDEO_URL);
+        driver.get(VIDEO_URL); // parallel: getDriver().get(...)
         js = (JavascriptExecutor) driver;
         wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("video")));

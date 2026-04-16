@@ -7,11 +7,11 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class Livestream extends ProfileSession {
+public class Livestream extends ProfileSession { // parallel: extends ProfileSessionParallel
 
     @BeforeClass
     public void getLivestream() {
-        driver.get("https://www.youtube.com/");
+        driver.get("https://www.youtube.com/"); // parallel: getDriver().get(...)
 
         try { 
             Thread.sleep(2500); 

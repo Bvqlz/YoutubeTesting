@@ -11,14 +11,14 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class ShortsTests extends ProfileSession {
+public class ShortsTests extends ProfileSession { // parallel: extends ProfileSessionParallel
 
     private static final String SHORTS_URL = "https://www.youtube.com/shorts/_3Evgblmfwo";
     private WebDriverWait wait;
 
     @BeforeClass
     public void openShort() {
-        wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(15)); // parallel: getDriver()
 
         // Load the Short once — all tests run continuously from this single load
         driver.get(SHORTS_URL);

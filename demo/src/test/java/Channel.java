@@ -4,11 +4,11 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class Channel  extends ProfileSession {
+public class Channel  extends ProfileSession { // parallel: extends ProfileSessionParallel
 
     @BeforeClass
     public void openYoutube() {
-        driver.get("https://www.youtube.com/");
+        driver.get("https://www.youtube.com/"); // parallel: getDriver().get(...)
     }
 
 

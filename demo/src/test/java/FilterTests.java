@@ -4,7 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class FilterTests extends ProfileSession {
+public class FilterTests extends ProfileSession { // parallel: extends ProfileSessionParallel
 
     // Go directly to search results instead of using the search bar
     private static final String SEARCH_URL = "https://www.youtube.com/results?search_query=intro+to+python";
@@ -12,7 +12,7 @@ public class FilterTests extends ProfileSession {
     @BeforeClass
     public void navigateToSearch() {
         // Load the search results page so the suite starts from a known state
-        driver.get(SEARCH_URL);
+        driver.get(SEARCH_URL); // parallel: getDriver().get(...)
 
         try {
             Thread.sleep(2500);
